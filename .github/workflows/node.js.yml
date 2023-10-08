@@ -16,4 +16,4 @@ jobs:
         run: ssh ubuntu@54.77.132.163 'bash -s' < /home/ubuntu/test.sh
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        continue-on-error: true
+        continue-on-error: true 
