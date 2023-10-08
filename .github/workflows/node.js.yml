@@ -13,10 +13,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run script on EC2
-         run: |
-           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-           chmod 600 ~/.ssh/id_rsa
-           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@54.77.132.163 'bash -s' < /home/ubuntu/test.sh
+        run: |
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@54.77.132.163 'bash -s' < /home/ubuntu/test.sh
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        continue-on-error: true 
+        continue-on-error: true
