@@ -15,19 +15,19 @@ jobs:
 
     - name: Set up SSH key
       run: |
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -t $HOST >> ~/.ssh/known_hosts
-        chmod 644 ~/.ssh/known_hosts
+        echo "$SSH_PRIVATE_KEY" > $HOME/.ssh/id_rsa
+        chmod 600 $HOME/.ssh/id_rsa
+        ssh-keyscan -t $HOST >> $HOME/.ssh/known_hosts
+        chmod 644 $HOME/.ssh/known_hosts
       env:
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY }}
-        USER : ${{secrets.USER}}
-        HOST : ${{secrets.HOST}}
+        USER: ${{secrets.USER}}
+        HOST: ${{secrets.HOST}}
 
     - name: Run test.sh on the server
       run: |
-        ssh -i ~/.ssh/id_rsa USER@HOST '/home/ubuntu/scripts/test.sh'
+        ssh -i $HOME/.ssh/id_rsa $USER@$HOST '/home/ubuntu/scripts/test.sh'
       
     - name: Check Node.js version on the server
       run: |
-        ssh -i ~/.ssh/id_rsa USER@HOST 'node -v'
+        ssh -i $HOME/.ssh/id_rsa $USER@$HOST 'node -v'
