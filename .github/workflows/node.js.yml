@@ -1,4 +1,4 @@
-name: Deploy to EC2
+name: Run Test Script and Node Version
 
 on:
   push:
@@ -7,13 +7,27 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    runs-on: ubuntu-latest
 
-      - name: Run script on EC2
-        run: ssh ubuntu@34.247.87.122 'bash -s' < /home/ubuntu/scripts/test.sh
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        continue-on-error: true
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up SSH key
+      run: |
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -t rsa your_server_ip >> ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        USER : ${{secrets.USER}}
+        HOST : ${{secrets.HOST}}
+
+    - name: Run test.sh on the server
+      run: |
+        ssh -i ~/.ssh/id_rsa USER@HOST '/home/ubuntu/scripts/test.sh'
+      
+    - name: Check Node.js version on the server
+      run: |
+        ssh -i ~/.ssh/id_rsa USER@HOST 'node -v'
