@@ -31,11 +31,6 @@ jobs:
         ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.251.221.47 'exit'
       continue-on-error: true
 
-    - name: Use Node.js 20 with nvm
-      run: |
-        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.251.221.47 'source ~/.nvm/nvm.sh && nvm install 20 && nvm use 20'
-      continue-on-error: true
-
     - name: Check server node version
       run: |
         ssh -i ~/.ssh_id_rsa -o StrictHostKeyChecking=no ubuntu@34.251.221.47 'node -v'
