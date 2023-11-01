@@ -17,8 +17,8 @@ jobs:
         git gc --aggressive --prune=all
       continue-on-error: true
 
-    - name: Checkout code
-      uses: actions/checkout@v3
+#    - name: Checkout code
+#      uses: actions/checkout@v3
 
     - name: Run script on EC2
       env:
