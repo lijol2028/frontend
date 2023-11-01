@@ -20,7 +20,7 @@ jobs:
         EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
       run: |
         chmod 600 /home/ubuntu/test.sh  # Make sure your script is executable
-        ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $EC2_USERNAME@$EC2_HOST "cd /home/ubuntu && ./test.sh"
+        ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ubuntu@$34.251.221.47 "cd /home/ubuntu && ./test.sh"
     
     - name: Check Node.js version on EC2
       env:
