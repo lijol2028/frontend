@@ -21,3 +21,9 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.251.221.47 'bash -s' < /home/ubuntu/test.sh
       continue-on-error: true
+    - name: Check server node version
+      run: |
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.251.221.47 && node -v
+      continue-on-error: true
