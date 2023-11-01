@@ -25,4 +25,6 @@ jobs:
     - name: Check server node version
       run: |
         ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.251.221.47 'node -v'
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.251.221.47 'npm -v'
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.251.221.47 'nvm list'
       continue-on-error: true
